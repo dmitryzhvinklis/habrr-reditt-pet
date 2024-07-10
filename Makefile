@@ -44,5 +44,9 @@ run:
 # Запуск тестов
 test:
 	$(GOTEST) -v ./...
+	
+# Поднятие контейнера
+up:
+	docker-compose up -d
 
 .PHONY: help build clean fmt install run test
