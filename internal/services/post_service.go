@@ -7,15 +7,12 @@ import (
 )
 
 func CreatePost(userID int, content string, allowComments bool) (models.Post, error) {
-	query := `INSERT INTO posts (user_id, content, allow_comments) VALUES ($1, $2, $3) RETURNING id`
+	query := `INSERT INTO posts (user_id, content, allow_comments) VALUES ($1, $2, $3) RETURNING id, user_id, content, allow_comments`
 	var post models.Post
-	err := db.DB.QueryRow(context.Background(), query, userID, content, allowComments).Scan(&post.ID)
+	err := db.DB.QueryRow(context.Background(), query, userID, content, allowComments).Scan(&post.ID, &post.UserID, &post.Content, &post.AllowComments)
 	if err != nil {
 		return post, err
 	}
-	post.UserID = userID
-	post.Content = content
-	post.AllowComments = allowComments
 	return post, nil
 }
 

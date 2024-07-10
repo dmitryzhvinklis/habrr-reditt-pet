@@ -12,7 +12,7 @@ var CommentType = graphql.NewObject(graphql.ObjectConfig{
 		"user_id":           &graphql.Field{Type: graphql.Int},
 		"parent_comment_id": &graphql.Field{Type: graphql.Int},
 		"content":           &graphql.Field{Type: graphql.String},
-		"created_at":        &graphql.Field{Type: graphql.String},
+		"created_at":        &graphql.Field{Type: graphql.String}, // GraphQL scalar type
 	},
 })
 
@@ -22,5 +22,5 @@ type Comment struct {
 	UserID          int
 	ParentCommentID int
 	Content         string
-	CreatedAt       string
+	CreatedAt       *string // Change type to *string
 }
