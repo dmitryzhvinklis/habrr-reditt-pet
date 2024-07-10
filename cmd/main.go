@@ -29,11 +29,6 @@ func main() {
 		Pretty:   true,
 		GraphiQL: true, // Включаем GraphiQL интерфейс для удобства разработки
 	})
-
-	// Обработка статических файлов фронтенда
-	fs := http.FileServer(http.Dir("frontend"))
-	http.Handle("/", fs)
-
 	// Endpoint для GraphQL API
 	http.Handle("/graphql", graphqlHandler)
 
