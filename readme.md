@@ -2,6 +2,7 @@
 
 Сгенерировать пост - 
 
+```
 mutation {
   createPost(user_id: 1, content: "Новый пост", allow_comments: true) {
     id
@@ -10,7 +11,7 @@ mutation {
     allow_comments
   }
 }
-
+```
 Сгенерировать комментарий к посту - 
 
 mutation {
