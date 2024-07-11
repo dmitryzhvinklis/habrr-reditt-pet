@@ -1,14 +1,14 @@
-FROM golang:latest
+FROM golang:1.18
 
-ENV GO111MODULE=on
+WORKDIR /app
 
-WORKDIR /go/src/app
-COPY . .
+COPY go.mod .
+COPY go.sum .
 
 RUN go mod download
 
-RUN go build -o ozon-test ./cmd
+COPY . .
 
-EXPOSE 8080
+RUN go build -o ozon-test cmd/main.go
 
 CMD ["./ozon-test"]
