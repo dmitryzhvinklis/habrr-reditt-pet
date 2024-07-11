@@ -60,12 +60,13 @@ mutation {
 ```
 mutation {
   createComment(post_id: 1, user_id: 1, parent_comment_id: 1, content: "Отличный пост") {
-    id
-    post_id
-    user_id
-    parent_comment_id
-    content
-    created_at
+    ID
+    PostID
+    UserID
+    ParentCommentID
+    Content
+    CreatedAt
   }
 }
+
 ```
