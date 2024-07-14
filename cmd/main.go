@@ -5,17 +5,15 @@ import (
 	"net/http"
 
 	"github.com/graphql-go/handler"
-	"github.com/joho/godotenv"
 
+	"ozon-test/config"
 	"ozon-test/internal/db"
 	"ozon-test/internal/graph"
 )
 
 func main() {
-	// Загрузка переменных окружения из файла .env
-	if err := godotenv.Load(); err != nil {
-		log.Fatalf("Error loading .env file: %v", err)
-	}
+	// Загрузка конфигурации (переменных окружения)
+	config.LoadConfig()
 
 	// Инициализация базы данных
 	db.InitDB()
@@ -29,11 +27,6 @@ func main() {
 		Pretty:   true,
 		GraphiQL: true, // Включаем GraphiQL интерфейс для удобства разработки
 	})
-
-	// Обработка статических файлов фронтенда
-	fs := http.FileServer(http.Dir("frontend"))
-	http.Handle("/", fs)
-
 	// Endpoint для GraphQL API
 	http.Handle("/graphql", graphqlHandler)
 
