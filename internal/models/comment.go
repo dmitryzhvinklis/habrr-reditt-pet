@@ -1,20 +1,10 @@
 package models
 
 import (
+	"time"
+
 	"github.com/graphql-go/graphql"
 )
-
-var CommentType = graphql.NewObject(graphql.ObjectConfig{
-	Name: "Comment",
-	Fields: graphql.Fields{
-		"id":                &graphql.Field{Type: graphql.Int},
-		"post_id":           &graphql.Field{Type: graphql.Int},
-		"user_id":           &graphql.Field{Type: graphql.Int},
-		"parent_comment_id": &graphql.Field{Type: graphql.Int},
-		"content":           &graphql.Field{Type: graphql.String},
-		"created_at":        &graphql.Field{Type: graphql.String}, // GraphQL scalar type
-	},
-})
 
 type Comment struct {
 	ID              int
@@ -22,5 +12,17 @@ type Comment struct {
 	UserID          int
 	ParentCommentID int
 	Content         string
-	CreatedAt       *string // Change type to *string
+	CreatedAt       *time.Time // Используем указатель для обработки NULL значений
 }
+
+var CommentType = graphql.NewObject(graphql.ObjectConfig{
+	Name: "Comment",
+	Fields: graphql.Fields{
+		"ID":              &graphql.Field{Type: graphql.Int},
+		"PostID":          &graphql.Field{Type: graphql.Int},
+		"UserID":          &graphql.Field{Type: graphql.Int},
+		"ParentCommentID": &graphql.Field{Type: graphql.Int},
+		"Content":         &graphql.Field{Type: graphql.String},
+		"CreatedAt":       &graphql.Field{Type: graphql.String},
+	},
+})
